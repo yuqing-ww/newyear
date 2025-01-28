@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>新年上上签</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8B0000, #CD0000);
+            font-family: "KaiTi", "楷体", serif;
+        }
+        
+        .container {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, rgba(180, 0, 0, 0.95), rgba(139, 0, 0, 0.95));
+        }
+        
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 60%),
+                linear-gradient(45deg, rgba(255, 215, 0, 0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 215, 0, 0.05) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255, 215, 0, 0.05) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255, 215, 0, 0.05) 75%);
+            background-size: 
+                100% 100%,
+                20px 20px,
+                20px 20px,
+                20px 20px,
+                20px 20px;
+            background-position: 
+                0 0,
+                0 0,
+                10px 0,
+                0 10px,
+                10px 10px;
+            opacity: 0.3;
+        }
+
+        .decorative-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            pointer-events: none;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            width: 100%;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .header {
+            font-size: 20px;
+            color: #FFE4B5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: left;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .fortune {
+            width: 100%;
+            font-size: 42px;
+            line-height: 1.3;
+            color: #FFD700;
+            font-weight: bold;
+            text-align: left;
+            display: none;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.5),
+                0 0 20px rgba(255, 215, 0, 0.3);
+            margin-bottom: 20px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .interpretation {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #FFE4B5;
+            text-align: left;
+            display: none;
+            padding: 0 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+        
+        .button {
+            min-width: 160px;
+            height: 44px;
+            background: linear-gradient(145deg, #FFD700, #FF8C00);
+            border: none;
+            border-radius: 22px;
+            color: #800000;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: inherit;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.2),
+                inset 0 -2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .button:hover::after {
+            left: 100%;
+        }
+
+        @media screen and (max-width: 320px) {
+            .container {
+                width: 90vw;
+                height: 120vw;
+            }
+            
+            .fortune {
+                font-size: 36px;
+            }
+            
+            .interpretation {
+                font-size: 16px;
+            }
+            
+            .button {
+                min-width: 140px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-pattern"></div>
+        <div class="decorative-border"></div>
+        <div class="content-wrapper">
+            <div class="header">妤晴祝您蛇年——</div>
+            <div class="fortune" id="fortune"></div>
+            <div class="interpretation" id="interpretation"></div>
+            <div class="button-container">
+                <button class="button" onclick="generateFortune()">获取新年祝福</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fortunes = [
+            ["蛇来运转、事事顺遂", "新的一年，万事如意，前程似锦，福运绵长。"],
+            ["且行且乐、应当珍惜", "把握当下，享受生活，美好时光定会如约而至。"],
+            ["春风得意、前程似锦", "新年伊始，万象更新，定有好运随行。"],
+            ["福星高照、喜气盈门", "吉星高照，诸事顺遂，必有好运相伴。"],
+            ["龙蛇飞舞、步步高升", "事业蒸蒸日上，前程一片光明，必有所成。"],
+            ["金玉满堂、财源广进", "财运亨通，生意兴隆，定能收获满满。"],
+            ["平安喜乐、万事顺遂", "心想事成，幸福安康，美满生活在前方。"],
+            ["吉星高照、福运绵长", "好运连连，福气满满，定能实现心愿。"],
+            ["春暖花开、万象更新", "新的开始，充满希望，必有好事发生。"],
+            ["福寿安康、家和万事", "阖家欢乐，幸福安康，美满生活永相伴。"]
+        ];
+
+        let isGenerating = false;
+
+        function generateFortune() {
+            if (isGenerating) return;
+            isGenerating = true;
+
+            const index = Math.floor(Math.random() * fortunes.length);
+            const fortuneElement = document.getElementById('fortune');
+            const interpretationElement = document.getElementById('interpretation');
+            
+            fortuneElement.style.display = 'block';
+            interpretationElement.style.display = 'block';
+            
+            fortuneElement.style.opacity = '0';
+            interpretationElement.style.opacity = '0';
+            fortuneElement.style.transform = 'translateY(20px)';
+            interpretationElement.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                fortuneElement.textContent = fortunes[index][0];
+                interpretationElement.textContent = fortunes[index][1];
+                
+                fortuneElement.classList.add('fade-in');
+                
+                setTimeout(() => {
+                    interpretationElement.classList.add('fade-in');
+                    isGenerating = false;
+                }, 300);
+            }, 100);
+        }
+
+        // 性能优化：使用 passive 监听器
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // 防抖处理
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
